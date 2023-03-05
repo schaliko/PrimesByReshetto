@@ -14,7 +14,7 @@ int main()
     }
 
     // getting the identity
-    int shmid = shmget(key, sizeof(int), IPC_CREAT | IPC_EXCL | 0666);
+    int shmid = shmget(key, sizeof(int),  0666);
     if (shmid == -1) {
         if (errno == EEXIST) {
             std::cerr << "Segment already exists" << std::endl;
