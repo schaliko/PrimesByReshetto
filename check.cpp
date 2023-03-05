@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     }
 
     // geting identity
-    int shmid = shmget(key, sizeof(int), 0666 | IPC_CREAT);
+    int shmid = shmget(key, sizeof(int), 0666);
     if (shmid == -1) {
         perror("shmget");
 	exit(1);
@@ -38,28 +38,22 @@ int main(int argc, char *argv[]) {
     }
 
     // using Reshetto for checking the N
-    std::vector<int> primes;
-    std::vector<bool> is_prime(N + 1, true);
-    for (int i = 2; i <= N; i++) {
-        if (is_prime[i]) {
-            primes.push_back(i);
-            for (int j = i * i; j <= N; j += i) {
-                is_prime[j] = false;
-            }
-        }
-    }
+//    std::vector<int> primes;
+//    std::vector<bool> is_prime(N + 1, true);
+//    for (int i = 2; i <= N; i++) {
+//        if (is_prime[i]) {
+//            primes.push_back(i);
+//            for (int j = i * i; j <= N; j += i) {
+//                is_prime[j] = false;
+//            }
+//        }
+//   }
 
-    // checking if N is prime
-    bool is_prime_n = false;
-    for (int i = 0; i < primes.size(); i++) {
-        if (primes[i] == N) {
-            is_prime_n = true;
-            break;
-        }
-    }
 
-    // print the answer
-    if (is_prime_n) {
+    // check if the number is prime
+    if (N < 2 || N > 300) {
+        std::cerr << "Number out of range" << std::endl;
+    } else if (shm[N-1] == 0) {
         std::cout << "Yes" << std::endl;
     } else {
         std::cout << "No" << std::endl;

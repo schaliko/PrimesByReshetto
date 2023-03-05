@@ -19,8 +19,12 @@ int main() {
     // get identity from file's key
     int shmid = shmget(key, SHM_SIZE, IPC_CREAT | 0666);
     if (shmid == -1) {
-        perror("shmget");
-        exit(1);
+	if(errno == EEXIST){
+		std::cerr << "shmget: share memory segment already exists" << std::endl;
+	}else{
+        	perror("shmget");
+	}
+	exit(1);
     }
 
     // shared memory attach
