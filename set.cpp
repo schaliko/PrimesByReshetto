@@ -37,7 +37,7 @@ int main()
     }
 
     // creating resheto
-    for (int i = 2; i <= N; i++) {
+    for (int i = 2; i * i <= N; i++) {
         if (numbers[i-1] == 0) {
             for (int j = i*i; j <= N; j += i) {
                 numbers[j-1] = 1;

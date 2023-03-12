@@ -11,11 +11,6 @@ int main(int argc, char *argv[]) {
 
     int N = std::stoi(argv[1]);
 
-    if (N <= 1) {
-        std::cerr << "N should be greater than 1" << std::endl;
-        exit(1);
-    }
-
     // creating the key
     key_t key = ftok("file.txt", 'R');
     if (key == -1) {
